@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="layout/main-layout :: head"></head>
+<body>
+
+
+<header th:insert="layout/main-layout.html :: header"></header>
+
+<div th:if="${evento != null}">
+    <div class="container detalhesEvento">
+        <h5>Detalhes do Evento</h5>
+        <ul class="list-group">
+            <li class="list-group-item">Nome: <span th:text="${evento.nome}"></span></li>
+            <li class="list-group-item">Local: <span th:text="${evento.local}"></span></li>
+            <li class="list-group-item">Data: <span th:text="${evento.data}"></span></li>
+            <li class="list-group-item">Horario: <span th:text="${evento.horario}"></span></li>
+        </ul>
+    </div>
+    <th:block th:include="mensagemValidacao"></th:block>
+
+    <div class="container formConvidado">
+        <h5>Adicionar convidados</h5>
+        <form method="post">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input type="text" value="" id="nomeConvidado" name="nomeConvidado"/>
+                            <label for="nomeConvidado">Nome</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input type="text" value="" id="rg" name="rg"/>
+                            <label for="rg">RG</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="waves-effect waves-light btn-small" type="submit">Adicionar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h5>Convidados deste evento</h5>
+
+        <div th:if="${convidados.isEmpty()}" class="alert alert-warning" role="alert">
+            Este evento não possui convidados ainda.
+        </div>
+
+        <table th:if="${!convidados.isEmpty()}" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>RG</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="convidado : ${convidados}">
+                <td><span th:text="${convidado.nomeConvidado}"></span></td>
+                <td><span th:text="${convidado.rg}"></span></td>
+                <td><a class="waves.effect waves.light btn-small"
+                       th:href="'/eventos/convidado/deletar/' + ${convidado.rg}"><i
+                        class="material-icons left">delete</i>Excluir</a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+<div th:if="${evento == null}">
+    Evento não existe!
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery.3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<footer th:insert="layout/main-layout.html :: footer"></footer>
+
+</body>
+</html>

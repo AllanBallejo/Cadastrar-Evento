@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="layout/main-layout :: head"></head>
+
+<body>
+
+<header th:insert="layout/main-layout.html :: header"> </header>
+
+<div class="container formEvento">
+    <th:block th:include="mensagemValidacao"></th:block>
+
+    <form method="post">
+
+        Nome: <input type="text" value="" name="nome"/>
+        <div class="row">
+            <div class="input-field col s6">
+                Local: <input type="text" value="" name="local"/>
+            </div>
+            <div class="input-field col s3">
+                Data: <input type="date" value="" name="data"/>
+            </div>
+            <div class="input-field col s3">
+                Horario: <input type="time" value="" name="horario"/>
+            </div>
+        </div>
+
+        <button class="waves-effect waves-light btn" type="submit">Salvar</button>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<footer th:insert="layout/main-layout.html :: footer"></footer>
+
+</body>
+
+</html>

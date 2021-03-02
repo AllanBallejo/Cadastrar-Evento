@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<div class="alert alert-success" role="alert" th:if="${mensagem != null && mensagem != ''}">
+    <span th:text="${mensagem}"></span>
+</div>
+
+</body>
+</html>
